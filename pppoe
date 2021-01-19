@@ -1,0 +1,20 @@
+:global result [/tool fetch mode=https url="https://unixlocal.tk/user/service" http-data="email=teste2@unix.local&password=1234&mikrotik=true"];
+:global content [/file get [/file find name=service] contents];
+:global contentLen [ :len $content ] ;
+
+:global lineEnd 0;
+:global line "";
+:global lastEnd 0;
+/ ppp secret remove [find];
+/ppp secret add name="teste" password="teste";
+:do {
+       :set lineEnd [:find $content "|" $lastEnd ] ;
+       :set line [:pick $content $lastEnd $lineEnd] ;
+       :set lastEnd ( $lineEnd + 1 ) ;
+
+       :local tmpArray [:toarray $line] ;
+	:if ( [:pick $tmpArray 0] != "" ) do={
+	:put $tmpArray;
+/ppp secret add name=[:pick $tmpArray 0]  password=1234;
+}
+} while ($lineEnd < $contentLen)
