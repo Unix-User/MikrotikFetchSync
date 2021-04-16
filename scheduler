@@ -1,0 +1,4 @@
+:global result [/tool fetch mode=https url="https://unixlocal.tk//user/service" http-data="email=teste@teste.com&password=something&mikrotik=true"];
+/ppp secret remove [find where comment="Cliente do Fulano"];
+/ppp profile remove [find where comment="Plano do Fulano"];
+/system script run pppoe;
