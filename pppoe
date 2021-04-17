@@ -13,6 +13,6 @@
 	:if ( [:pick $tmpArray 0] != "" ) do={
 	:put $tmpArray;
 /ppp profile add name=[:pick $tmpArray 0] rate-limit=[:pick $tmpArray 3] comment="Plano do Fulano";
-/ppp secret add name=[:pick $tmpArray 0] profile=[:pick $tmpArray 0] service=pppoe password=1234 comment="Cliente do Fulano";
+/ppp secret add name=[:pick $tmpArray 0] profile=[:pick $tmpArray 0] service=pppoe password=[:pick $tmpArray 2] comment="Cliente do Fulano";
 }
 } while ($lineEnd < $contentLen - 1)
